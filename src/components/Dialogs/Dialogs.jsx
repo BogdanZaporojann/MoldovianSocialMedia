@@ -2,7 +2,18 @@ import style from './Dialogs.module.css'
 import {DialogItem} from "./Dialog/Dialog";
 import {MessageItem} from "./Message/Message";
 import React from "react";
-import {addMessage} from "../state";
+
+
+
+const ADD_MESSAGE_CREATOR = () => ({
+    type: 'ADD-MESSAGE'
+})
+
+
+const UPDATE_MESSAGE_CREATOR = (body) => ({
+    type: 'UPDATE-MESSAGE',
+    body: body
+})
 
 
 export const Dialogs = (props) => {
@@ -17,13 +28,14 @@ export const Dialogs = (props) => {
 
 
     let newMessage = () => {
+        debugger
         let text = newMessageElement.current.value;
-        addMessage(text);
+        props.dispatch(ADD_MESSAGE_CREATOR());
     }
 
     let onMessageChange = () => {
-        let text = newMessageElement
-        props.updateMessage(text)
+        let body = newMessageElement.current.value;
+        props.dispatch(UPDATE_MESSAGE_CREATOR(body))
     }
 
     return(

@@ -1,6 +1,19 @@
 import {Post} from "./Post/Post";
 import React from "react";
 
+const ADD_POST_ACTION_CREATOR = () => {
+    let ADD_POST = 'ADD-POST'
+    return{
+        type: ADD_POST
+    }
+}
+const UPDATE_POST_ACTION_CREATOR = (text) => {
+    let UPDATE_POST = 'UPDATE-POST'
+    return {
+        type: UPDATE_POST,
+        text: text
+    }
+}
 
 export const MyPost = (props) => {
 
@@ -9,15 +22,13 @@ export const MyPost = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-
-        let text = newPostElement.current.value;
-        props.addPost(text);
-        newPostElement='';
+        debugger
+        props.dispatch(ADD_POST_ACTION_CREATOR());
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updatePost(text);
+        props.dispatch(UPDATE_POST_ACTION_CREATOR(text));
     }
     return(
 
