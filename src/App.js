@@ -4,10 +4,13 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 function App(props) {
+
     return (
+
         <div className="app-wrapper">
 
             <Header />
@@ -19,15 +22,9 @@ function App(props) {
 
                 <Routes>
 
-                    <Route path="/profile" element={<Profile state={props.state}
-                                                             dispatch={props.dispatch}
-                                                             addPost={props.addPost}
-                                                             updatePost={props.updatePost}/>}/>
+                    <Route path="/profile" element={<Profile />}/>
 
-                    <Route path="/dialogs" element={<Dialogs state={props.state}
-                                                             dispatch={props.dispatch}
-                                                             addMessage={props.addMessage}
-                                                             updateMessage={props.updateMessage}/>}/>
+                    <Route path="/dialogs" element={<DialogsContainer />}/>
 
                 </Routes>
 

@@ -5,37 +5,24 @@ import React from "react";
 
 
 
-const ADD_MESSAGE_CREATOR = () => ({
-    type: 'ADD-MESSAGE'
-})
-
-
-const UPDATE_MESSAGE_CREATOR = (body) => ({
-    type: 'UPDATE-MESSAGE',
-    body: body
-})
-
-
 export const Dialogs = (props) => {
 
 
-    let dialogs = props.state.dialogPage.dialogData.map((dialog)=> <DialogItem id={dialog.id} name={dialog.name}/>)
+    let dialogs = props.state.dialogPage.dialogData.map((dialog)=> <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
-    let messages = props.state.dialogPage.messageData.map((message)=><MessageItem message={message.message}/>)
+    let messages = props.state.dialogPage.messageData.map((message)=><MessageItem key={message.id} message={message.message}/>)
 
 
     let newMessageElement = React.createRef();
 
 
     let newMessage = () => {
-        debugger
-        let text = newMessageElement.current.value;
-        props.dispatch(ADD_MESSAGE_CREATOR());
+        props.sendMessage()
     }
 
     let onMessageChange = () => {
         let body = newMessageElement.current.value;
-        props.dispatch(UPDATE_MESSAGE_CREATOR(body))
+        props.updateNewMessageBody(body)
     }
 
     return(

@@ -16,7 +16,7 @@ export const Navbar = () => {
             </div>
 
             <div>
-                <NavLink to="/dialog">Settings</NavLink>
+                <NavLink to="/settings">Settings</NavLink>
             </div>
 
         </div>

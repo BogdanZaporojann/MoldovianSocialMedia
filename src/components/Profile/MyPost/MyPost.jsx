@@ -1,35 +1,27 @@
 import {Post} from "./Post/Post";
 import React from "react";
-
-const ADD_POST_ACTION_CREATOR = () => {
-    let ADD_POST = 'ADD-POST'
-    return{
-        type: ADD_POST
-    }
-}
-const UPDATE_POST_ACTION_CREATOR = (text) => {
-    let UPDATE_POST = 'UPDATE-POST'
-    return {
-        type: UPDATE_POST,
-        text: text
-    }
-}
+import {ADD_POST_ACTION_CREATOR} from "../../../redux/profile-reducer";
+import {UPDATE_POST_ACTION_CREATOR} from "../../../redux/profile-reducer";
 
 export const MyPost = (props) => {
 
-    let posts = props.state.profilePage.profileData.map((post)=><Post text={post.text} likesCount={post.likesCount}/>)
+    let posts = props.posts.map((post)=><Post key={post.id} text={post.text} likesCount={post.likesCount}/>)
 
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        debugger
-        props.dispatch(ADD_POST_ACTION_CREATOR());
-    }
+        props.addPost()
+        // props.dispatch(ADD_POST_ACTION_CREATOR())
+    };
 
     let onPostChange = () => {
+        debugger
         let text = newPostElement.current.value;
-        props.dispatch(UPDATE_POST_ACTION_CREATOR(text));
+        props.updateNewPostText(text)
+        // props.dispatch(UPDATE_POST_ACTION_CREATOR(text))
     }
+
+    window.props=props
     return(
 
         <div>
@@ -38,7 +30,7 @@ export const MyPost = (props) => {
 
                 <textarea onChange={onPostChange}
                           ref={newPostElement}
-                          value={props.state.profilePage.newPostText}></textarea>
+                          value={props.newPostText}></textarea>
 
                 <button onClick={addPost}>ADD</button>
 
