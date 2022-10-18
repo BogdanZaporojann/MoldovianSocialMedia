@@ -4,7 +4,8 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersComponent from "./components/Users/UsersComponent";
+import {SwapiContainer} from "./components/Swapi/SwapiContainer";
 
 
 const App = (props) => {
@@ -26,7 +27,9 @@ const App = (props) => {
 
                     <Route path="/dialogs" element={<DialogsContainer />}/>
 
-                    <Route path="/users" element={<UsersContainer />}/>
+                    <Route path="/users" element={<UsersComponent />}/>
+
+                    <Route path="/swapi" element={<SwapiContainer />}/>
 
                 </Routes>
 

@@ -23,6 +23,9 @@ export const Navbar = () => {
                 <NavLink to="/users">Users</NavLink>
             </div>
 
+            <div>
+                <NavLink to="/swapi">Swapi</NavLink>
+            </div>
         </div>
 
     );
