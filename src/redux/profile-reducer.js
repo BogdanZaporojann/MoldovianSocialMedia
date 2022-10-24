@@ -2,9 +2,10 @@ import {store} from "./store";
 
 const ADD_POST= 'ADD-POST'
 const UPDATE_POST='UPDATE-POST';
+const SET_USER_PROFILE='SET_USER_PROFILE';
 
 let initialState = {
-    profileData : [
+    profileData: [
         {
             id: 1,
             text: 'Text 1',
@@ -21,7 +22,8 @@ let initialState = {
             likesCount:3
         }
     ],
-    newPostText : 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    profile: null
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -42,6 +44,13 @@ export const profileReducer = (state = initialState, action) => {
             stateCopy.newPostText = action.text;
             return stateCopy;
         }
+        case SET_USER_PROFILE: {
+            debugger
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
         default:
             return state;
     }
@@ -61,3 +70,8 @@ export const UPDATE_POST_ACTION_CREATOR = (text) => {
         text: text
     }
 }
+
+export const setUserProfile = (profile) => ({
+    type: SET_USER_PROFILE,
+    profile
+})
