@@ -4,13 +4,15 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {usersReducer} from "./users-reducer";
 import {swapiReducer} from "./swapiReducer";
+import {authReducer} from "./auth";
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogsReducer,
     sidebarPage: sidebarReducer,
     usersPage: usersReducer,
-    swapiPage: swapiReducer
+    swapiPage: swapiReducer,
+    auth: authReducer
 })
 
 export let store = legacy_createStore(reducers);
