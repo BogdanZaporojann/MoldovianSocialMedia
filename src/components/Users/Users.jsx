@@ -2,6 +2,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/219983.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 export const Users = (props) => {
@@ -34,8 +35,33 @@ export const Users = (props) => {
                     </div>
                     <div>
                         {user.followed
-                            ? <button onClick={ () => {props.unfollow(user.id)} }>UNFOLLOW</button>
-                            : <button onClick={ () => {props.follow(user.id)} }>FOLLOW</button>}
+
+                            ? <button onClick={ () => {
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/`+user.id,{
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': '5d793c99-cbef-4f7e-8001-c502c1ec99a5'
+                                    }
+                                    }).then(result => {
+                                        if(result.data.resultCode==0){
+                                            props.unfollow(user.id)
+                                        }
+                                });
+                            }}>UNFOLLOW</button>
+
+
+                            : <button onClick={ () => {
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/`+user.id,{},{
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': '5d793c99-cbef-4f7e-8001-c502c1ec99a5'
+                                    }
+                                }).then(result => {
+                                    if(result.data.resultCode==0){
+                                        props.follow(user.id)
+                                    }
+                                });
+                            }}>FOLLOW</button>}
                     </div>
 
                     <div>Name: {user.name}</div>

@@ -69,7 +69,7 @@ export const follow = (userId) => ({
     type: FOLLOW,
     userId: userId
 })
-
+debugger
 export const unfollow = (userId) => ({
     type: UNFOLLOW,
     userId: userId
