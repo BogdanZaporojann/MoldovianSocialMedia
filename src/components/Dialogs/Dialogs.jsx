@@ -2,6 +2,7 @@ import style from './Dialogs.module.css'
 import {DialogItem} from "./Dialog/Dialog";
 import {MessageItem} from "./Message/Message";
 import React from "react";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -25,7 +26,9 @@ export const Dialogs = (props) => {
         props.updateNewMessageBody(body)
     }
 
+
     return(
+
 
 
 

@@ -6,6 +6,7 @@ import UsersComponent from "./components/Users/UsersContainer";
 import {SwapiContainer} from "./components/Swapi/SwapiContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login/Login";
 
 
 const App = (props) => {
@@ -22,7 +23,7 @@ const App = (props) => {
 
             <div className="app-wrapper-content">
 
-
+                    <Route path="/login" render={ () => <Login />}/>
 
                     <Route path="/profile/:userId?" render={ () => <ProfileContainer />}/>
 

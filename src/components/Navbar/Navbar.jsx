@@ -26,6 +26,10 @@ export const Navbar = () => {
             <div>
                 <NavLink to="/swapi">Swapi</NavLink>
             </div>
+
+            <div>
+                <NavLink to="/login">Login</NavLink>
+            </div>
         </div>
 
     );
