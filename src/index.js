@@ -7,7 +7,6 @@ import {store} from "./redux/redux-store";
 import {Provider} from 'react-redux';
 
 
-const rerenderEntireTree = () => {
 
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,9 +17,9 @@ const rerenderEntireTree = () => {
                 </Provider>
         </React.StrictMode>
     );
-}
 
-rerenderEntireTree();
+
+
 
 
 

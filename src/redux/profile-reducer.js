@@ -1,4 +1,4 @@
-import {store} from "./store";
+import {userAPI} from "../api/api";
 
 const ADD_POST= 'ADD-POST'
 const UPDATE_POST='UPDATE-POST';
@@ -56,13 +56,13 @@ export const profileReducer = (state = initialState, action) => {
 }
 
 
-export const ADD_POST_ACTION_CREATOR = () => {
+export const addPost = () => {
     let ADD_POST = 'ADD-POST'
     return{
         type: ADD_POST
     }
 }
-export const UPDATE_POST_ACTION_CREATOR = (text) => {
+export const updateNewPostText = (text) => {
     let UPDATE_POST = 'UPDATE-POST'
     return {
         type: UPDATE_POST,
@@ -74,3 +74,13 @@ export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
     profile
 })
+
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        debugger
+        userAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data));
+            })
+    }
+}
