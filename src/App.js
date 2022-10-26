@@ -1,7 +1,7 @@
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersComponent from "./components/Users/UsersContainer";
 import {SwapiContainer} from "./components/Swapi/SwapiContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
