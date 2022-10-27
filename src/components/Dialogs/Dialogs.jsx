@@ -1,9 +1,8 @@
-import style from './Dialogs.module.css'
+import styles from './Dialogs.module.css'
 import {DialogItem} from "./Dialog/Dialog";
 import {MessageItem} from "./Message/Message";
 import React from "react";
-import {Redirect} from "react-router-dom";
-
+import {Field, reduxForm} from "redux-form";
 
 
 export const Dialogs = (props) => {
@@ -14,16 +13,9 @@ export const Dialogs = (props) => {
     let messages = props.state.dialogPage.messageData.map((message)=><MessageItem key={message.id} message={message.message}/>)
 
 
-    let newMessageElement = React.createRef();
 
-
-    let newMessage = () => {
-        props.sendMessage()
-    }
-
-    let onMessageChange = () => {
-        let body = newMessageElement.current.value;
-        props.updateNewMessageBody(body)
+    let onAddMessage = (values) => {
+        props.sendMessage(values.newMessageBody);
     }
 
 
@@ -32,28 +24,34 @@ export const Dialogs = (props) => {
 
 
 
-        <div className={style.dialogs}>
+        <div className={styles.dialogs}>
 
-            <div className={style.dialogsItem}>
+            <div className={styles.dialogsItem}>
                 {dialogs}
             </div>
 
-            <div>
-
+            <div className={styles.messagesItem}>
                 {messages}
-
-                <div>
-                    <textarea onChange={onMessageChange}
-                              ref={newMessageElement}
-                              value={props.state.dialogPage.newMessageText}></textarea>
-
-                    <button onClick={newMessage}>ADD</button>
-                </div>
-
             </div>
 
-
-
+            <MyDialogFormRedux onSubmit={onAddMessage}/>
         </div>
     );
 }
+
+const MyDialogForm = (props) => {
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component="textarea"
+                   name="newMessageBody"
+                   placeholder="Daradi daradi da tam tam Ararat TV cu Joric Cuartanov"/>
+            <div>
+                <button>SEND</button>
+            </div>
+        </form>
+    );
+}
+
+const MyDialogFormRedux = reduxForm({
+    form: "dialogForm"
+})(MyDialogForm)
