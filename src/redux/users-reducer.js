@@ -17,8 +17,7 @@ let initialState = {
     pageSize: 10,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
-
+    followingInProgress: [],
 }
 
 export const usersReducer = (state = initialState, action) =>{
@@ -116,7 +115,6 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
 
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
-
         dispatch(toggleIsFetching(true));
         dispatch(setCurrentPage(currentPage));
         userAPI.getUsers(currentPage, pageSize)

@@ -7,6 +7,7 @@ import {swapiReducer} from "./swapiReducer";
 import {authReducer} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
+import {appReducer} from "./app-reducer";
 
 
 let reducers = combineReducers({
@@ -16,7 +17,8 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     swapiPage: swapiReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app : appReducer
 })
 
 export let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware));
