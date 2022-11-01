@@ -4,7 +4,7 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {usersReducer} from "./users-reducer";
 import {swapiReducer} from "./swapiReducer";
-import {authReducer} from "./auth";
+import {authReducer} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 

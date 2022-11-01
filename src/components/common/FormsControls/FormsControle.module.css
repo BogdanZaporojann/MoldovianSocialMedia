@@ -10,4 +10,8 @@
     color: red;
 }
 
-
+.formSummaryError {
+    color: red;
+    margin: 5px;
+    border: 2px red solid;
+}
