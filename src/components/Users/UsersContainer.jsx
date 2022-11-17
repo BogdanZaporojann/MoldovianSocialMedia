@@ -5,7 +5,14 @@ import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress, getIsAuth} from "../../redux/users-selectors";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsAuth,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount
+} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component{
 
@@ -20,8 +27,10 @@ class UsersContainer extends React.Component{
 
     render(){
 
+
         return(
             <>
+
                 {this.props.isFetching
                     ? <Preloader />
                     : null}

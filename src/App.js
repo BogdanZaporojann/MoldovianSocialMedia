@@ -1,17 +1,17 @@
 import React from "react";
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersComponent from "./components/Users/UsersContainer";
-import {SwapiContainer} from "./components/Swapi/SwapiContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {compose} from "redux";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {SwapiContainer} from "./components/Swapi/SwapiContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 class App extends React.Component {
 
@@ -30,7 +30,6 @@ class App extends React.Component {
 
         return (
 
-            <BrowserRouter>
 
                 <div className="app-wrapper">
 
@@ -39,22 +38,23 @@ class App extends React.Component {
                     <Navbar/>
 
                     <div className="app-wrapper-content">
+                       <Routes>
+                           <Route path="/login" element={<Login/>}/>
 
-                        <Route path="/login" render={() => <Login/>}/>
+                           <Route path="/profile" element={<ProfileContainer />}/>
 
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                           <Route path="/profile/:userId" element={<ProfileContainer/>}/>
 
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                           <Route path="/dialogs" element={<DialogsContainer/>}/>
 
-                        <Route path="/users" render={() => <UsersComponent/>}/>
+                           <Route path="/users" element={<UsersContainer /> }/>
 
-                        <Route path="/swapi" render={() => <SwapiContainer/>}/>
-
-
+                           <Route path="/swapi" element={<SwapiContainer/>}/>
+                       </Routes>
                     </div>
+
                 </div>
 
-            </BrowserRouter>
 
         );
     }

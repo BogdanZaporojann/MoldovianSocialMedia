@@ -1,60 +1,48 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControls";
-import {required} from "../../utils/validators/validator";
-import {login, logout} from "../../redux/auth-reducer";
+import {getCaptchaUrl, login, logout} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import styles from './../common/FormsControls/FormsControle.module.css'
+import {Field, Form, Formik} from "formik";
 
-const LoginForm = (props) => {
-    return(
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field validate={[required]} component={Input} name={"email"} type="text" placeholder="Name"/>
-            </div>
-            <div>
-                <Field validate={[required]} component={Input} name={"password"} type="text" placeholder="Password"/>
-            </div>
-            <div>
-                <Field component={Input} name={"rememberMe"} type="checkbox"/> <span>Remember me</span>
-            </div>
-            {props.error && <div className={styles.formSummaryError}>
-                {props.error}
-            </div>
-            }
-            <button>Send</button>
-        </form>
-    );
-}
-
-const LoginReduxForm = reduxForm({
-    form: 'loginForm'
-})(LoginForm)
 
 const Login = (props) => {
 
-    const onSubmit = (formData) => {
-        console.log(formData);
-        let {email, password, rememberMe} = formData
-        props.login(email,password,rememberMe);
-    }
-    if(props.isAuth){
-        return <Redirect to="/profile"/>
-    }
 
     return (
         <>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <Formik initialValues={{
+                email: '',
+                password: '',
+                rememberMe: false,
+            }} onSubmit={({email,password,rememberMe})=>{props.login(email,password,rememberMe)}}>
+
+                {props => (
+                    <Form>
+                        <div>
+                            <Field onChange={props.handleChange} type="text" name="email"/>
+                        </div>
+                        <div>
+                            <Field onChange={props.handleChange} type="text" name="password"/>
+                        </div>
+                        <div>
+                            <Field onChange={props.handleChange} type="checkbox" name="rememberMe"/>
+                        </div>
+                        <div>
+                            <button type="submit">send</button>
+                        </div>
+                    </Form>
+                )}
+            </Formik>
         </>
     );
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 
 
-export default connect(mapStateToProps,{login,logout})(Login)
+
+export default connect(mapStateToProps,{login,logout,getCaptchaUrl})(Login)

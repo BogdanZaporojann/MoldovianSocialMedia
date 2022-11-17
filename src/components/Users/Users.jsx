@@ -2,7 +2,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/219983.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {userAPI} from "../../api/api";
+import {Paginator} from "./Paginator";
 
 
 export const Users = (props) => {
@@ -18,17 +18,11 @@ export const Users = (props) => {
     return(
         <div>
 
-            <div>
-                {pages.map( (page)=>{
-                    return <span className={props.currentPage === page && styles.selectedPage}
-                                 onClick={(e) => props.onPageChanged(page)}>{page}</span>
-                })}
-
-            </div>
+            <Paginator totalUsersCount={props.totalUsersCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
             {
                 props.usersData.map((user) => <div key={user.id}>
                     <div>
-                        <NavLink to={"profile/"+user.id}>
+                        <NavLink to={`profile/${user.id}`}>
                             <img className={styles.images} src={user.photos.small != null ? user.photos.small : userPhoto} />
                         </NavLink>
                     </div>

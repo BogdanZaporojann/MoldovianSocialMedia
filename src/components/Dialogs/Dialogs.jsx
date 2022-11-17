@@ -2,9 +2,8 @@ import styles from './Dialogs.module.css'
 import {DialogItem} from "./Dialog/Dialog";
 import {MessageItem} from "./Message/Message";
 import React from "react";
-import {Field, reduxForm} from "redux-form";
-import {Textarea} from "../common/FormsControls/FormsControls";
-import {required, maxLengthCreator} from "../../utils/validators/validator";
+import {maxLengthCreator} from "../../utils/validators/validator";
+import {Field, Form, Formik} from "formik";
 
 
 const maxLength100 = maxLengthCreator(100);
@@ -39,26 +38,23 @@ export const Dialogs = (props) => {
                 {messages}
             </div>
 
-            <MyDialogFormRedux onSubmit={onAddMessage}/>
+            <Formik initialValues={{
+                message: ''
+            }} onSubmit={({message})=>{console.log(message)
+                                                props.sendMessage(message)}}>
+                {props => (
+                    <Form>
+                        <Field placeholder="message textarea" onChange={props.handleChange} name="message" type="textarea"></Field>
+                        <button type="submit">send</button>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 }
 
 const MyDialogForm = (props) => {
     return(
-        <form onSubmit={props.handleSubmit}>
-            <Field component={Textarea}
-                   name="newMessageBody"
-                   placeholder="Daradi daradi da tam tam Ararat TV cu Joric Cuartanov"
-                   validate={[required,maxLength100]}/>
-
-            <div>
-                <button>SEND</button>
-            </div>
-        </form>
+        <div></div>
     );
 }
-
-const MyDialogFormRedux = reduxForm({
-    form: "dialogForm"
-})(MyDialogForm)

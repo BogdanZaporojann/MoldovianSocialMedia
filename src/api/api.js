@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 
 let instance = axios.create({
@@ -16,9 +16,9 @@ export let userAPI = {
             .then(result => result.data);
     },
     unfollow(userId=1){
-        debugger
         return instance.delete(`follow/${userId}`)
             .then(result => result.data);
+        debugger
     },
     follow(userId=1){
         return instance.post(`follow/${userId}`)
@@ -53,10 +53,15 @@ export const authAPI = {
             .then(result => result.data)
     },
     login(email, password, rememberMe=false) {
-        debugger
         return instance.post(`/auth/login`, {email, password, rememberMe})
     },
     logout(){
         return instance.delete(`auth/login`)
+    }
+}
+
+export const captchaAPI = {
+    getCaptcha(){
+        return instance.get(`security/get-captcha-url`).then(result=>result.data.url)
     }
 }
