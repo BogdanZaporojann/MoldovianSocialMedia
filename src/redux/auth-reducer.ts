@@ -70,7 +70,7 @@ export type GetCaptchaUrlSuccessType = {
     captchaUrl: string | null
 }
 
-const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessType => ({
+const getCaptchaUrlSuccess = (captchaUrl: string | null): GetCaptchaUrlSuccessType => ({
     type: GET_CAPTCHA_URL_SUCCESS,
     captchaUrl
 })
@@ -89,19 +89,22 @@ export const getAuthUserData = () => async (dispatch: any) => {
 
 
 
-export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean,captchaUrl:string) => async (dispatch: any) => {
 
-    let result = await authAPI.login(email, password, rememberMe);
+    let result = await authAPI.login(email, password, rememberMe,captchaUrl);
             if(result.data.resultCode === 0){
-                debugger
                 dispatch(getAuthUserData())
+                dispatch(getCaptchaUrlSuccess(null));
+            }
+            if(result.data.resultCode === 10){
+                debugger
+                dispatch(getCaptchaUrl())
             }
 }
 
 export const logout = () => async (dispatch: any) => {
     let result = await authAPI.logout()
             if(result.data.resultCode === 0){
-                debugger
                 dispatch(setAuthUserData(null,null,null,false))
             }
 }

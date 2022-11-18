@@ -7,6 +7,8 @@ import {Field, Form, Formik} from "formik";
 const Login = (props) => {
 
 
+
+
     return (
         <>
             <h1>Login</h1>
@@ -14,7 +16,8 @@ const Login = (props) => {
                 email: '',
                 password: '',
                 rememberMe: false,
-            }} onSubmit={({email,password,rememberMe})=>{props.login(email,password,rememberMe)}}>
+                captchaUrl: ''
+            }} onSubmit={({email,password,rememberMe,captchaUrl})=>{props.login(email,password,rememberMe,captchaUrl)}}>
 
                 {props => (
                     <Form>
@@ -28,11 +31,17 @@ const Login = (props) => {
                             <Field onChange={props.handleChange} type="checkbox" name="rememberMe"/>
                         </div>
                         <div>
+                            {<Field type="text" name="captchaUrl" onChange={props.handleChange}></Field>}
+                        </div>
+                        <div>
                             <button type="submit">send</button>
                         </div>
                     </Form>
                 )}
             </Formik>
+            {props.isAuth ? null: <div>
+                <img src={props.captchaUrl}/>
+            </div>}
         </>
     );
 }
@@ -45,4 +54,4 @@ let mapStateToProps = (state) => ({
 
 
 
-export default connect(mapStateToProps,{login,logout,getCaptchaUrl})(Login)
+export default connect(mapStateToProps,{login,logout})(Login)
