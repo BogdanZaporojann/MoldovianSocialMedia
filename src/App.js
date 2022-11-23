@@ -3,7 +3,7 @@ import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import LoginContainer from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {compose} from "redux";
@@ -17,7 +17,6 @@ class App extends React.Component {
 
     componentDidMount() {
         this.props.initializeApp();
-        console.log(this.props.initialize)
     }
 
 
@@ -38,7 +37,7 @@ class App extends React.Component {
 
                     <div className="app-wrapper-content">
                        <Routes>
-                           <Route path="/login" element={<Login/>}/>
+                           <Route path="/login" element={<LoginContainer/>}/>
 
                            <Route path="/profile" element={<ProfileContainer />}/>
 

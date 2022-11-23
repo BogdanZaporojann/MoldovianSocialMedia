@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {getUsers, onFollow, onUnfollow, toggleFollowingProgress, setCurrentPage} from "../../redux/users-reducer";
+import {getUsers, onFollow, onUnfollow} from "../../redux/users-reducer";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
@@ -8,7 +8,6 @@ import {compose} from "redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
-    getIsAuth,
     getIsFetching,
     getPageSize,
     getTotalUsersCount
@@ -30,8 +29,6 @@ type MapDispatchToPropsType = {
     getUsers: (currentPage: number,pageSize: number) => void
     onFollow: (userId: number) => void
     onUnfollow: (userId: number) => void
-    setCurrentPage: (pageNumber: number) => void
-    toggleFollowingProgress: (question: boolean, userId: number) => void
 }
 
 
@@ -47,7 +44,6 @@ class UsersContainer extends React.Component<PropsType>{
 
     onPageChanged = (pageNumber: number) => {
         const {pageSize} = this.props
-        this.props.setCurrentPage(pageNumber)
         this.props.getUsers(pageNumber, pageSize);
     }
 
@@ -88,5 +84,5 @@ let mapStateToProps = (state: AppStateType) : MapStateToPropsType  => ({
 export default compose(
     withAuthRedirect,
     connect<MapStateToPropsType,MapDispatchToPropsType,null,AppStateType>(
-        mapStateToProps, {getUsers, onFollow, onUnfollow, toggleFollowingProgress, setCurrentPage})
+        mapStateToProps, {getUsers, onFollow, onUnfollow, })
 )(UsersContainer)

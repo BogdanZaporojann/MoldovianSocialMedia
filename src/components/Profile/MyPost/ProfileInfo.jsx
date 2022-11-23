@@ -2,13 +2,21 @@ import ava from '../../../assets/images/219983.png'
 import {ProfileStatus} from "./Post/ProfileStatus";
 import {ProfileStatusWithHooks} from "./Post/ProfileStatusWithHooks";
 
-export const ProfileInfo = (props) => {
+export const ProfileInfo = ({profile,status,isOwner,updateUserStatus,savePhoto}) => {
+
+    const onMainPhotoSelected = (e) => {
+        if(e.target.files.length){
+            savePhoto(e.target.files[0])
+        }
+    }
+
     return(
         <>
-            <img src="https://resources.premierleague.com/photos/2022/01/11/9364d63f-bfcd-4245-a9e4-cadf93518ab1/GettyImages-1348306988.jpg?width=930&height=620" alt="Mount"/>
-            <div>{!props.profile ? <img src={ava} alt="MyLittleAva"/>  :  <img src={props.profile.photos.large} alt="photos"/>}</div>
-            <ProfileStatusWithHooks status={props.status}
-                           updateUserStatus={props.updateUserStatus}/>
+            <div>{!profile ? <img src={ava} alt="MyLittleAva"/>  :  <img src={profile.photos.large} alt="photos"/>}</div>
+            {isOwner && <input onChange={onMainPhotoSelected} type="file"/>}
+
+            <ProfileStatusWithHooks status={status}
+                           updateUserStatus={updateUserStatus}/>
         </>
     );
 

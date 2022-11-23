@@ -1,7 +1,8 @@
 import React from "react";
-import {getCaptchaUrl, login, logout} from "../../redux/auth-reducer";
+import {login, logout} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {Field, Form, Formik} from "formik";
+import {Navigate} from "react-router-dom";
 
 
 const Login = (props) => {
@@ -9,15 +10,20 @@ const Login = (props) => {
 
 
 
+
     return (
-        <>
+        props.isAuth
+            ? <Navigate to="/profile" />
+            : <div>
             <h1>Login</h1>
             <Formik initialValues={{
                 email: '',
                 password: '',
                 rememberMe: false,
                 captchaUrl: ''
-            }} onSubmit={({email,password,rememberMe,captchaUrl})=>{props.login(email,password,rememberMe,captchaUrl)}}>
+            }} onSubmit={({email,password,rememberMe,captchaUrl})=>{
+                {props.login(email,password,rememberMe,captchaUrl)}
+            }}>
 
                 {props => (
                     <Form>
@@ -42,7 +48,7 @@ const Login = (props) => {
             {props.isAuth ? null: <div>
                 <img src={props.captchaUrl}/>
             </div>}
-        </>
+        </div>
     );
 }
 
