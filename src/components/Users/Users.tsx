@@ -4,7 +4,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/219983.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {Paginator} from "./Paginator";
+import Paginator from "../common/Paginator/Paginator";
 import {UserType} from "../../types/types";
 
 
